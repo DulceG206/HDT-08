@@ -1,14 +1,9 @@
 class Nodo: 
-    #Se crea el constructor al inicio
-    def _init_(self, nodoD, nodoI):
-        self.nodoD = nodoD
-        self.nodoI = nodoI 
+    #creo el constructor de nodo 
+    def _init_(self, valor):
+        self.valor = valor
+        self.nodoD = None 
+        self.nodoI = None 
 
-    #se crean los métodos de la clase
-    
-
-
-
-
-
-
+    #creo los métodos de nodo (si es necesario)
+     
