@@ -1,5 +1,5 @@
-import Bst as Bst
-import Nodo as Nodo
+from Bst import Bst
+from Nodo import Nodo
 import random 
 
 class Main: 
@@ -56,3 +56,11 @@ class Main:
     for i in range(50):
         _, iterations = bst.search(target)
         print(f"Búsqueda {i+1}: {iterations} iteraciones")
+
+
+if __name__ == "__main__":
+    escenario_A()
+    escenario_B()
+    escenario_C()
+
+    
