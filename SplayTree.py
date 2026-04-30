@@ -99,30 +99,16 @@ class SplayTree:
         while actual:
             iteraciones += 1
             ultimo = actual
-<<<<<<< HEAD
-
-=======
->>>>>>> 3d5ad8f8d30ceb13acbc71ae99af8078c39cc6e1
             if valor == actual.valor:
                 self._splay(actual)
                 return actual, iteraciones
             elif valor < actual.valor:
-<<<<<<< HEAD
                 actual = actual.izq
             else:
                 actual = actual.der
 
-=======
-                actual = actual.nodoI
-            else:
-                actual = actual.nodoD
- 
->>>>>>> 3d5ad8f8d30ceb13acbc71ae99af8078c39cc6e1
         if ultimo:
             self._splay(ultimo)
 
         return None, iteraciones
-<<<<<<< HEAD
  
-=======
->>>>>>> 3d5ad8f8d30ceb13acbc71ae99af8078c39cc6e1
