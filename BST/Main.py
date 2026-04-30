@@ -1,66 +1,75 @@
 from Bst import Bst
 from Nodo import Nodo
+from Splay import SplayTree
 import random 
+import time 
+import matplotlib.pyply as plt
 
-class Main: 
 
-    #Escenario A (Llegada Aleatoria)
+def medir(tree, valores):
+    inicio = time.time()
 
-    def escenario_A(): print("\n Escenario A: Aleatorio")
+    for v in valores:
+        tree.insert(v) if hasattr(tree, "insert") else tree.insertar(v)
 
-    bst = Bst()
+    total_iter = 0
 
-    values = random.sample(range(1, 5000), 1000)
+    for v in random.sample(valores, 100):
+        if hasattr(tree, "search"):
+            _, it = tree.search(v)
+        else:
+            _, it = tree.buscar(v)
+        total_iter += it
 
-    for v in values:
-        bst.insert(v)
+    fin = time.time()
 
-    total_iterations = 0
-    search_values = random.sample(values, 100)
+    return fin - inicio, total_iter / 100
 
-    for v in search_values:
-        _, it = bst.search(v)
-        total_iterations += it
 
-    avg = total_iterations / 100
-    print("Promedio de iteraciones:", avg)
+def main():
+    sizes = [100, 500, 1000, 2000]
 
-    #Escenario B (Llegada Secuencial)
+    bst_times = []
+    splay_times = []
 
-    def escenario_B(): print("\n Escenario B: Peor caso (ordenado)")
+    bst_iters = []
+    splay_iters = []
 
-    bst = Bst()
+    for n in sizes:
+        valores = random.sample(range(1, 10000), n)
 
-    for i in range(1, 1001):
-        bst.insert(i)
+        bst = Bst()
+        splay = SplayTree()
 
-    _, iterations = bst.search(1000)
+        t1, it1 = medir(bst, valores)
+        t2, it2 = medir(splay, valores)
 
-    print("Iteraciones para encontrar 1000:", iterations)
+        bst_times.append(t1)
+        splay_times.append(t2)
 
-    #Escenario C (Proceso Frecuente)
+        bst_iters.append(it1)
+        splay_iters.append(it2)
 
-    def escenario_C(): print("\n Escenario C: Búsqueda repetida")
+    # Gráfica tiempo
+    plt.figure()
+    plt.plot(sizes, bst_times, label="BST")
+    plt.plot(sizes, splay_times, label="Splay")
+    plt.legend()
+    plt.title("Tiempo de ejecución")
+    plt.xlabel("N procesos")
+    plt.ylabel("Tiempo (s)")
+    plt.show()
 
-    bst = Bst()
-
-    values = random.sample(range(1, 5000), 1000)
-
-    for v in values:
-        bst.insert(v)
-
-    target = random.choice(values)
-
-    print(f"Buscando repetidamente el valor: {target}")
-
-    for i in range(50):
-        _, iterations = bst.search(target)
-        print(f"Búsqueda {i+1}: {iterations} iteraciones")
+    # Gráfica iteraciones
+    plt.figure()
+    plt.plot(sizes, bst_iters, label="BST")
+    plt.plot(sizes, splay_iters, label="Splay")
+    plt.legend()
+    plt.title("Iteraciones promedio")
+    plt.xlabel("N procesos")
+    plt.ylabel("Iteraciones")
+    plt.show()
 
 
 if __name__ == "__main__":
-    escenario_A()
-    escenario_B()
-    escenario_C()
-
-    
+    main()

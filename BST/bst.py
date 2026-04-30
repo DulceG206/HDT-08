@@ -1,4 +1,4 @@
-import Nodo as Nodo
+from Nodo import Nodo
 
 class Bst:
         # creo el constructor del bst 
@@ -14,16 +14,16 @@ class Bst:
         current = self.raiz
         while True:
             if valor < current.valor:
-                if current.NodoI:
-                    current = current.NodoI
+                if current.izq:
+                    current = current.izq
                 else:
-                    current.NodoI = Nodo(valor)
+                    current.izq = Nodo(valor)
                     return
             else:
-                if current.NodoD:
-                    current = current.NodoD
+                if current.der:
+                    current = current.der
                 else:
-                    current.NodoD = Nodo(valor)
+                    current.der = Nodo(valor)
                     return
 
     def search(self, valor):
@@ -36,9 +36,9 @@ class Bst:
             if valor == current.valor:
                 return current, iterations
             elif valor < current.valor:
-                current = current.NodoI
+                current = current.izq
             else:
-                current = current.NodoD
+                current = current.der
 
         return None, iterations
 

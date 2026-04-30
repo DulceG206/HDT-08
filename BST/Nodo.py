@@ -1,9 +1,10 @@
 class Nodo: 
     #creo el constructor de nodo 
-    def _init_(self, valor):
+    def __init__(self, valor):
         self.valor = valor
-        self.nodoD = None 
-        self.nodoI = None 
+        self.der = None 
+        self.izq = None
+        self.padre = None 
 
     #creo los métodos de nodo (si es necesario)
      
